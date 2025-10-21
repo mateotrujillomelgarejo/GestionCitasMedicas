@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Editar Doctor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body class="p-4">
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>Editar Doctor</h3>
+    <a class="btn btn-secondary" href="/doctores">Volver</a>
+  </div>
+
+  <form th:action="@{/doctores/actualizar}" th:object="${doctor}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <div class="mb-3">
+      <label class="form-label">Nombre</label>
+      <input class="form-control" th:field="*{nombre}" required />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Especialidad</label>
+      <input class="form-control" th:field="*{especialidad}" required />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Horario Disponible</label>
+      <input class="form-control" th:field="*{horarioDisponible}" />
+    </div>
+    <button class="btn btn-primary" type="submit">Actualizar</button>
+    <a class="btn btn-outline-secondary" href="/doctores">Cancelar</a>
+  </form>
+</div>
+</body>
+</html>

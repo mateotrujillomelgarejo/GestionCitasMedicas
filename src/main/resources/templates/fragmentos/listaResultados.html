@@ -1,0 +1,30 @@
+<!-- templates/fragmentos/listaResultados.html -->
+<div th:fragment="resultadosFragment">
+  <table class="table table-sm table-hover">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>DNI</th>
+        <th>Teléfono</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="p : ${pacientes}">
+        <td th:text="${p.nombreCompleto}">Juan Pérez</td>
+        <td th:text="${p.dni}">12345678</td>
+        <td th:text="${p.celular}">999888777</td>
+        <td>
+          <button type="button" class="btn btn-success btn-sm seleccionar-btn"
+    th:attr="data-id=${p.idPaciente},
+             data-nombre=${p.nombreCompleto},
+             data-dni=${p.dni},
+             data-historia=${p.historiaClinica}">
+  Seleccionar
+</button>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

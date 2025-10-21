@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Doctores - Lista</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body class="p-4">
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>Doctores</h3>
+    <div>
+      <a class="btn btn-primary" href="/doctores/registrar">Nuevo Doctor</a>
+      <a class="btn btn-secondary" href="/dashboard">Volver</a>
+    </div>
+  </div>
+
+  <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+  <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Especialidad</th>
+        <th>Horario Disponible</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="d : ${doctores}">
+        <td th:text="${d.id}">1</td>
+        <td th:text="${d.nombre}">Dr. Ejemplo</td>
+        <td th:text="${d.especialidad}">Cardiología</td>
+        <td th:text="${d.horarioDisponible}">Lunes a Viernes</td>
+        <td>
+          <a th:href="@{|/doctores/editar/${d.id}|}" class="btn btn-sm btn-outline-primary">Editar</a>
+          <a th:href="@{|/doctores/eliminar/${d.id}|}" class="btn btn-sm btn-outline-danger"
+             onclick="return confirm('¿Deseas eliminar este doctor?');">Eliminar</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

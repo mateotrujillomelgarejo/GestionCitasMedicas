@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Consultar Cita</title>
+  <style>
+    body {font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background-color:#ffffff;padding:40px;color:#1a1a1a;}
+    h2 {font-size:24px;margin-bottom:25px;}
+    .form-row {display:flex;flex-wrap:wrap;gap:15px;align-items:flex-end;margin-bottom:25px;}
+    .form-group {display:flex;flex-direction:column;}
+    label {font-size:14px;font-weight:600;margin-bottom:6px;}
+    select,input[type="text"] {padding:10px;font-size:14px;border:1px solid #ccc;border-radius:6px;min-width:250px;}
+    button {background-color:#007bff;color:white;border:none;padding:10px 20px;font-size:15px;border-radius:6px;cursor:pointer;height:40px;margin-top:22px;}
+    button:hover {background-color:#0056b3;}
+    table {width:100%;border-collapse:collapse;margin-top:20px;}
+    th,td {text-align:left;padding:12px 10px;border:1px solid #ddd;font-size:14px;}
+    th {background-color:#f2f2f2;font-weight:600;}
+    tr:hover {background-color:#f9f9f9;}
+  </style>
+</head>
+<body>
+  <h2>Consultar Cita</h2>
+
+  <form th:action="@{/citas/consultar}" method="get" class="form-row">
+    <div class="form-group">
+      <label>Buscar por:</label>
+      <select name="criterio">
+        <option value="">Seleccione un criterio</option>
+        <option value="dni">DNI</option>
+        <option value="apellido">Apellidos</option>
+        <option value="codigo">Código de cita</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Consultar</label>
+      <input type="text" name="valor" placeholder="Ingrese el valor para consultar...">
+    </div>
+    <button type="submit">Buscar</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Código</th><th>Paciente</th><th>DNI</th><th>F.Nacimiento</th>
+        <th>Celular</th><th>Fecha y Hora</th><th>Doctor</th><th>Motivo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="cita : ${citas}">
+        <td th:text="${cita.codigoCita}"></td>
+        <td th:text="${cita.paciente.nombreCompleto}"></td>
+        <td th:text="${cita.paciente.dni}"></td>
+        <td th:text="${cita.paciente.fechaNacimiento}"></td>
+        <td th:text="${cita.paciente.celular}"></td>
+        <td th:text="${#dates.format(cita.fechaCita, 'dd/MM/yyyy')} + ' ' + ${cita.horaCita}"></td>
+        <td th:text="${cita.medico.nombreCompleto}"></td>
+        <td th:text="${cita.tipoAtencion}"></td>
+      </tr>
+      <tr th:if="${#lists.isEmpty(citas)}">
+        <td colspan="8" style="text-align:center;">No se encontraron citas.</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

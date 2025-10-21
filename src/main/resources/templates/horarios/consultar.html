@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Horarios Disponibles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #fff;
+            color: #000;
+        }
+
+        h2 {
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            font-size: 14px;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        input[type="date"] {
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 220px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 9px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        button:hover {
+            background-color: #0069d9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        .table-container {
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h2>Consultar Horarios Disponibles</h2>
+
+    <div class="form-container">
+        <div class="form-group">
+            <label for="especialidad">Especialidad</label>
+            <input type="text" id="especialidad" placeholder="Ejemplo: Cardiología">
+        </div>
+        <div class="form-group">
+            <label for="fecha">Fecha deseada</label>
+            <input type="text" id="fecha" placeholder="dd/mm/aaaa">
+        </div>
+        <button>Buscar</button>
+    </div>
+
+    <h3>Listado completo de Médicos y horarios</h3>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Especialidad</th>
+                    <th>Consultorio</th>
+                    <th>Teléfono</th>
+                    <th>Horarios disponibles</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Dr. Juan Pérez</td>
+                    <td>Cardiología</td>
+                    <td>101</td>
+                    <td>555-1234</td>
+                    <td>09:00, 10:00, 11:00</td>
+                </tr>
+                <tr>
+                    <td>Dra. Ana Gómez</td>
+                    <td>Dermatología</td>
+                    <td>202</td>
+                    <td>555-5678</td>
+                    <td>08:30, 09:30</td>
+                </tr>
+                <tr>
+                    <td>Dr. Luis Martínez</td>
+                    <td>Cardiología</td>
+                    <td>103</td>
+                    <td>555-8765</td>
+                    <td>14:00, 15:00, 16:00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

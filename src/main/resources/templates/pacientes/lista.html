@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mantener Paciente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            margin: 40px;
+        }
+
+        h2 {
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        .register-btn {
+            background-color: #198754;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: 10px;
+        }
+
+        .register-btn:hover {
+            background-color: #157347;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            text-align: left;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        .action-btn {
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            padding: 6px 10px;
+            font-size: 13px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .update-btn {
+            background-color: #0d6efd;
+        }
+
+        .update-btn:hover {
+            background-color: #0b5ed7;
+        }
+
+        .deactivate-btn {
+            background-color: #dc3545;
+        }
+
+        .deactivate-btn:hover {
+            background-color: #bb2d3b;
+        }
+
+        .icon {
+            font-weight: bold;
+        }
+
+        .actions {
+            display: flex;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Mantener Paciente</h2>
+
+    <div class="top-bar">
+        <input type="text" placeholder="Buscar por nombre, apellidos o DNI...">
+        <button class="register-btn">Registrar Paciente</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>DNI</th>
+                <th>Celular</th>
+                <th>Email</th>
+                <th>Género</th>
+                <th>Dirección</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>María</td>
+                <td>López</td>
+                <td>12345678</td>
+                <td>999111222</td>
+                <td>maria@example.com</td>
+                <td>F</td>
+                <td>Av. Perú 123</td>
+                <td>1990-04-10</td>
+                <td class="actions">
+                    <button class="action-btn update-btn">Actualizar</button>
+                    <button class="action-btn deactivate-btn">Desactivar</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Carlos</td>
+                <td>Ramírez</td>
+                <td>87654321</td>
+                <td>999222333</td>
+                <td>carlos@example.com</td>
+                <td>M</td>
+                <td>Jr. Lima 456</td>
+                <td>1985-09-22</td>
+                <td class="actions">
+                    <button class="action-btn update-btn">Actualizar</button>
+                    <button class="action-btn deactivate-btn">Desactivar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
