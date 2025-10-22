@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Generar Comprobante</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/all.min.css}">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #e3f2fd, #f8f9fa);
+            min-height: 100vh;
+        }
+
+        .card {
+            border-radius: 12px;
+        }
+
+        label {
+            font-weight: 600;
+        }
+
+        .menu-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #0d6efd;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            background-color: #0b5ed7;
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0d6efd;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #0d6efd;
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white text-center">
+            <h4><i class="fa-solid fa-file-invoice-dollar me-2"></i> Generar Comprobante de Pago</h4>
+        </div>
+
+        <div class="card-body p-4">
+            <form th:action="@{/comprobantes/guardar}" th:object="${comprobante}" method="post">
+
+                <!-- Sección: Cita -->
+<div class="mb-4">
+    <span class="section-title fw-bold">Cita Asociada</span>
+    
+    <div class="row mt-2">
+        <div class="col-md-3">
+            <label>N° de Cita</label>
+            <input type="text" id="codigoCita" class="form-control" 
+                   th:value="${comprobante.cita != null ? comprobante.cita.codigoCita : ''}" readonly>
+        </div>
+        <div class="col-md-4">
+            <label>Paciente</label>
+            <input type="text" id="nombrePaciente" class="form-control"
+                   th:value="${comprobante.cita != null ? comprobante.cita.paciente.nombreCompleto : ''}" readonly>
+        </div>
+        <div class="col-md-4">
+            <label>Médico</label>
+            <input type="text" id="nombreMedico" class="form-control"
+                   th:value="${comprobante.cita != null ? comprobante.cita.medico.nombre : ''}" readonly>
+        </div>
+        <div class="col-md-1 d-flex align-items-end">
+            <a th:href="@{/comprobantes/buscarCita}" class="btn btn-outline-primary w-100">Buscar</a>
+        </div>
+    </div>
+
+    <!-- Campo oculto para enviar el ID real de la cita -->
+    <input type="hidden" th:field="*{cita.idCita}" id="idCita">
+</div>
+
+
+                <!-- Sección: Datos del comprobante -->
+                <div class="section-title mb-2">Datos del Comprobante</div>
+                <div class="row mb-4">
+                    <div class="col-md-4 mb-3">
+                        <label>Tipo de Comprobante</label>
+                        <select th:field="*{tipoComprobante}" class="form-select" required>
+                            <option value="">Seleccione tipo</option>
+                            <option value="Boleta">Boleta</option>
+                            <option value="Factura">Factura</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>DNI / RUC</label>
+                        <input type="text" th:field="*{dniRuc}" class="form-control" placeholder="Ingrese documento" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Persona / Razón Social</label>
+                        <input type="text" th:field="*{personaRazonSocial}" class="form-control" placeholder="Ingrese nombre o razón social" required>
+                    </div>
+                </div>
+
+                <!-- Sección: Pago -->
+                <div class="section-title mb-2">Detalle de Pago</div>
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3">
+                        <label>Medio de Pago</label>
+                        <select th:field="*{medioPago}" class="form-select" required>
+                            <option value="">Seleccione medio de pago</option>
+                            <option value="Efectivo">Efectivo</option>
+                            <option value="Tarjeta">Tarjeta</option>
+                            <option value="Yape">Yape</option>
+                            <option value="Plin">Plin</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Monto Total</label>
+                        <input type="number" th:field="*{montoTotal}" class="form-control" step="0.01"
+                               placeholder="Ejemplo: 120.50" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100 py-2 fw-bold">
+                    <i class="fa-solid fa-check-circle me-2"></i> Generar Comprobante
+                </button>
+            </form>
+
+            <!-- Mensaje dinámico -->
+            <div th:if="${mensaje}"
+                 th:classappend="${mensaje.startsWith('✅')} ? 'alert alert-success mt-4' : 'alert alert-danger mt-4'"
+                 th:text="${mensaje}">
+            </div>
+
+            <a th:href="@{/comprobantes/listar}" class="btn btn-outline-secondary mt-3 w-100">
+                <i class="fa-solid fa-list me-2"></i> Ver Lista de Comprobantes
+            </a>
+        </div>
+    </div>
+
+    <!-- Botón regresar -->
+    <a th:href="@{/dashboard}" class="menu-btn">
+        <i class="fa-solid fa-arrow-left me-1"></i> Regresar
+    </a>
+</div>
+</body>
+</html>

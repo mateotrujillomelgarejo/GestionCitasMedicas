@@ -87,14 +87,13 @@
 <body>
   <div class="panel-card">
     <h2>Bienvenido, <span th:text="${usuario}">Cajero</span></h2>
-    <h5>Rol: Cajero</h5>
 
     <div class="d-grid gap-3">
-      <a href="/cdp" class="btn btn-primary">💳 Generar Comprobante de Pago</a>
-      <a th:href="@{/citas/menu}" class="btn btn-outline-primary">📋 Consultar Citas Atendidas</a>
+      <a th:href="@{/comprobantes/nuevo}" class="btn btn-primary">Generar Comprobante de Pago</a>
+      <a th:href="@{/citas/menu}" class="btn btn-outline-primary">Consultar Citas Atendidas</a>
 
       <form th:action="@{/logout}" method="post" class="mt-3">
-        <button type="submit" class="btn btn-danger w-100">🚪 Cerrar sesión</button>
+        <button type="submit" class="btn btn-danger w-100">Cerrar sesión</button>
       </form>
     </div>
   </div>

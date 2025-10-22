@@ -14,4 +14,6 @@ public interface CitaRepository extends JpaRepository<Cita, Long> {
     
     @Query(value = "SELECT codigo_cita FROM cita ORDER BY id_cita DESC LIMIT 1", nativeQuery = true)
     String obtenerUltimoCodigo();
+    List<Cita> findByEstadoNot(String string);
+    List<Cita> findByEstadoNotAndPaciente_NombreCompletoContainingIgnoreCase(String string,String filtro);
 }

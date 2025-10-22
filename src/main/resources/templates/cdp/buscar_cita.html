@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Cita</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body class="bg-light">
+
+<div class="container mt-4">
+    <h4 class="text-center mb-4">Buscar Cita Confirmada</h4>
+
+    <form class="mb-3" th:action="@{/comprobantes/buscarCita}" method="get">
+        <div class="input-group">
+            <input type="text" name="filtro" class="form-control" placeholder="Buscar por nombre o código">
+            <button class="btn btn-primary" type="submit">Buscar</button>
+        </div>
+    </form>
+
+    <table class="table table-bordered table-striped shadow-sm">
+        <thead class="table-primary">
+            <tr>
+                <th>Código</th>
+                <th>Paciente</th>
+                <th>Médico</th>
+                <th>Fecha Cita</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="c : ${citas}">
+                <td th:text="${c.codigoCita}"></td>
+                <td th:text="${c.paciente.nombreCompleto}"></td>
+                <td th:text="${c.medico.nombre}"></td>
+                <td th:text="${c.fechaCita}"></td>
+                <td>
+                    <a th:href="@{/comprobantes/seleccionarCita(id=${c.idCita})}" 
+                       class="btn btn-success btn-sm">Seleccionar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/comprobantes/nuevo}" class="btn btn-secondary">Volver</a>
+</div>
+
+</body>
+</html>

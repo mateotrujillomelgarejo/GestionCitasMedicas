@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Comprobantes</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container mt-5">
+    <h3 class="mb-4">Listado de Comprobantes Generados</h3>
+
+    <table class="table table-striped table-bordered shadow-sm">
+        <thead class="table-primary">
+            <tr>
+                <th>#</th>
+                <th>N° CDP</th>
+                <th>Paciente</th>
+                <th>Médico</th>
+                <th>Fecha Cita</th>
+                <th>Monto Total</th>
+                <th>Tipo</th>
+                <th>Medio Pago</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="c : ${comprobantes}">
+                <td th:text="${c.idComprobante}"></td>
+                <td th:text="${c.numeroCdp}"></td>
+                <td th:text="${c.cita.paciente.nombreCompleto}"></td>
+                <td th:text="${c.cita.medico.nombre}"></td>
+                <td th:text="${c.cita.fechaCita}"></td>
+                <td th:text="${c.montoTotal}"></td>
+                <td th:text="${c.tipoComprobante}"></td>
+                <td th:text="${c.medioPago}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/comprobantes/nuevo}" class="btn btn-primary">Nuevo Comprobante</a>
+</div>
+</body>
+</html>

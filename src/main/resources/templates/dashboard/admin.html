@@ -2,21 +2,93 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8" />
-  <title>Panel Administrador</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <title>Panel Administrador - Gestión de Citas</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/css/all.min.css}">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+    .navbar-brand {
+      font-weight: bold;
+    }
+  </style>
 </head>
-<body class="p-4">
-<div class="container text-center">
-  <h2>Bienvenido, <span th:text="${usuario}"></span></h2>
-  <h5 class="text-muted mb-4">Rol: Administrador</h5>
+<body>
+  
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+  <div class="container">
+    <a class="navbar-brand" href="#">Clinica Admin</a>
+    <div class="collapse navbar-collapse justify-content-end">
+      <span class="navbar-text text-white me-3">
+        <i class="fa-solid fa-user"></i> <span th:text="${usuario}"></span>
+      </span>
+      <a href="/logout" class="btn btn-danger btn-sm">Cerrar Sesión</a>
+    </div>
+  </div>
+</nav>
 
-  <div class="d-grid gap-3 col-6 mx-auto">
-    <a href="/usuarios" class="btn btn-primary">Mantenimiento de Usuarios</a>
-    <a href="/doctores" class="btn btn-primary">Mantenimiento de Doctores</a>
-    <a href="/auditoria" class="btn btn-outline-dark">Auditoría del Sistema</a>
-    <a href="/horarios" class="btn btn-outline-primary">Horarios de Doctores</a>
-    <a href="/logout" class="btn btn-danger">Cerrar Sesion</a>
+<!-- Main Content -->
+<div class="container mt-5">
+  <div class="text-center mb-4">
+    <h2>Panel de Administración</h2>
+    <p class="text-muted">Rol: Administrador</p>
+  </div>
+
+  <div class="row g-4 justify-content-center">
+
+    <!-- Mantenimiento de Usuarios -->
+    <div class="col-md-4">
+      <a href="/usuarios" class="text-decoration-none">
+        <div class="card card-hover text-center h-100">
+          <div class="card-body">
+            <i class="fa-solid fa-users fa-3x mb-3 text-primary"></i>
+            <h5 class="card-title">Mantenimiento de Usuarios</h5>
+            <p class="card-text text-muted">Agregar, editar o eliminar usuarios del sistema.</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Auditoría del Sistema -->
+    <div class="col-md-4">
+      <a href="/auditoria" class="text-decoration-none">
+        <div class="card card-hover text-center h-100">
+          <div class="card-body">
+            <i class="fa-solid fa-file-pen fa-3x mb-3 text-dark"></i>
+            <h5 class="card-title">Auditoría del Sistema</h5>
+            <p class="card-text text-muted">Revisar logs y acciones realizadas en el sistema.</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Otra opción / Módulo futuro -->
+    <div class="col-md-4">
+      <a href="citas/menu" class="text-decoration-none">
+        <div class="card card-hover text-center h-100">
+          <div class="card-body">
+            <i class="fa-solid fa-calendar-check fa-3x mb-3 text-success"></i>
+            <h5 class="card-title">Gestión de Citas</h5>
+            <p class="card-text text-muted">Administrar citas médicas de pacientes y médicos.</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
   </div>
 </div>
+
+<!-- Footer -->
+<footer class="mt-5 text-center text-muted">
+  <small>&copy; 2025 Clínica de Gestión Médica. Todos los derechos reservados.</small>
+</footer>
+
 </body>
 </html>
