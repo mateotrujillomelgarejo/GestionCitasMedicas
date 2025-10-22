@@ -11,4 +11,6 @@ public interface CitaService {
     Cita buscarPorCodigo(String codigo);
     void anularCita(Long id, String razon, String usuario);
     String obtenerUltimoCodigoCita();
+    List<Cita> buscarPorCriterio(String criterio, String valor);
+    Cita buscarPorId(Long id);
 }

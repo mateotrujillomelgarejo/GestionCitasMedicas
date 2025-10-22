@@ -29,6 +29,7 @@ public class SecurityConfig {
                 .requestMatchers("/usuarios/**", "/auditoria/**").hasRole("ADMINISTRADOR")
                 .requestMatchers("/citas/**", "/pacientes/**", "/horarios/**").hasAnyRole("RECEPCIONISTA", "ADMINISTRADOR")
                 .requestMatchers("/cdp/**").hasAnyRole("CAJERO", "ADMINISTRADOR")
+                .requestMatchers("/citas/consultar.html").hasAnyRole("CAJERO", "ADMINISTRADOR")
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form

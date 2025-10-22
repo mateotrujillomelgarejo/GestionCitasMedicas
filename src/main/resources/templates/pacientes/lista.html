@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -99,30 +99,33 @@
             background-color: #bb2d3b;
         }
 
-        .icon {
-            font-weight: bold;
-        }
-
         .actions {
             display: flex;
             gap: 5px;
         }
     </style>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/css/icons/bootstrap-icons.css}">
 </head>
 <body>
 
     <h2>Mantener Paciente</h2>
 
+    <!-- Barra superior de búsqueda y registro -->
     <div class="top-bar">
-        <input type="text" placeholder="Buscar por nombre, apellidos o DNI...">
-        <button class="register-btn">Registrar Paciente</button>
+        <form th:action="@{/pacientes/buscarTabla}" method="get" style="display:flex; width:100%;">
+            <input type="text" name="query" placeholder="Buscar por nombre o DNI..." />
+            <button type="submit" class="register-btn">Buscar</button>
+        </form>
+
+        <a th:href="@{/pacientes/registrar}" class="register-btn">Registrar Paciente</a>
     </div>
 
+    <!-- Tabla de pacientes -->
     <table>
         <thead>
             <tr>
-                <th>Nombre</th>
-                <th>Apellidos</th>
+                <th>Nombre Completo</th>
                 <th>DNI</th>
                 <th>Celular</th>
                 <th>Email</th>
@@ -133,36 +136,36 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>María</td>
-                <td>López</td>
-                <td>12345678</td>
-                <td>999111222</td>
-                <td>maria@example.com</td>
-                <td>F</td>
-                <td>Av. Perú 123</td>
-                <td>1990-04-10</td>
+            <tr th:each="paciente : ${pacientes}">
+                <td th:text="${paciente.nombreCompleto}">Nombre Completo</td>
+                <td th:text="${paciente.dni}">DNI</td>
+                <td th:text="${paciente.celular}">Celular</td>
+                <td th:text="${paciente.email}">Email</td>
+                <td th:text="${paciente.genero}">Género</td>
+                <td th:text="${paciente.direccion}">Dirección</td>
+                <td th:text="${paciente.fechaNacimiento}">Fecha</td>
                 <td class="actions">
-                    <button class="action-btn update-btn">Actualizar</button>
-                    <button class="action-btn deactivate-btn">Desactivar</button>
+                    <a th:href="@{/pacientes/editar/{id}(id=${paciente.idPaciente})}" class="action-btn update-btn">Actualizar</a>
+                    <a th:href="@{/pacientes/eliminar/{id}(id=${paciente.idPaciente})}" 
+                       class="action-btn deactivate-btn"
+                       onclick="return confirm('¿Seguro que deseas desactivar este paciente?');">
+                       Desactivar
+                    </a>
                 </td>
             </tr>
-            <tr>
-                <td>Carlos</td>
-                <td>Ramírez</td>
-                <td>87654321</td>
-                <td>999222333</td>
-                <td>carlos@example.com</td>
-                <td>M</td>
-                <td>Jr. Lima 456</td>
-                <td>1985-09-22</td>
-                <td class="actions">
-                    <button class="action-btn update-btn">Actualizar</button>
-                    <button class="action-btn deactivate-btn">Desactivar</button>
-                </td>
+
+            
+
+            <!-- Si no hay pacientes -->
+            <tr th:if="${#lists.isEmpty(pacientes)}">
+                <td colspan="8" style="text-align:center; color:#6c757d;">No se encontraron pacientes registrados.</td>
             </tr>
         </tbody>
     </table>
+
+    <a th:href="@{/dashboard}" class="btn btn-secondary position-fixed bottom-0 start-0 m-3">
+        Volver al Dashboard
+    </a>
 
 </body>
 </html>

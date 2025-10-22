@@ -5,277 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Registrar Cita</title>
 
-  <style>
-    body {
-      background-color: #fff;
-      color: #212529;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      padding: 40px;
-      margin: 0;
-    }
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  
+  <link rel="stylesheet" th:href="@{/css/registrarCita.css}">
 
-    h2 {
-      text-align: center;
-      font-weight: 600;
-      margin-bottom: 30px;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .form-section {
-      background: #f8f9fa;
-      border: 1px solid #dee2e6;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    .form-section h5 {
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-
-    label {
-      font-weight: 500;
-      font-size: 14px;
-      display: block;
-      margin-bottom: 6px;
-    }
-
-    /* Form grid */
-    .row {
-      display: flex;
-      flex-wrap: wrap;
-      margin-left: -10px;
-      margin-right: -10px;
-      gap: 10px;
-    }
-
-    .col-md-6 {
-      flex: 0 0 50%;
-      max-width: 50%;
-      padding-left: 10px;
-      padding-right: 10px;
-      box-sizing: border-box;
-    }
-
-    .col-md-4 {
-      flex: 0 0 33.3333%;
-      max-width: 33.3333%;
-      padding-left: 10px;
-      padding-right: 10px;
-      box-sizing: border-box;
-    }
-
-    /* Input and select styling */
-    input[type="text"],
-    input[type="date"],
-    input[type="time"],
-    select {
-      width: 100%;
-      padding: 8px 12px;
-      font-size: 14px;
-      border: 1px solid #ced4da;
-      border-radius: 4px;
-      box-sizing: border-box;
-      color: #212529;
-      background-color: #fff;
-      outline-offset: 2px;
-      transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    }
-
-    input[readonly] {
-      background-color: #e9ecef;
-      cursor: not-allowed;
-    }
-
-    input:focus,
-    select:focus {
-      border-color: #86b7fe;
-      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
-      outline: none;
-    }
-
-    /* Button styles */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 500;
-      font-size: 14px;
-      padding: 8px 16px;
-      border-radius: 4px;
-      border: none;
-      cursor: pointer;
-      user-select: none;
-      transition: background-color 0.15s ease-in-out;
-      gap: 6px;
-      text-decoration: none;
-      color: #fff;
-    }
-
-    .btn:disabled {
-      opacity: 0.65;
-      cursor: not-allowed;
-    }
-
-    .btn-success {
-      background-color: #198754;
-    }
-    .btn-success:hover {
-      background-color: #146c43;
-    }
-
-    .btn-dark {
-      background-color: #212529;
-    }
-    .btn-dark:hover {
-      background-color: #1a1e21;
-    }
-
-    .btn-secondary {
-      background-color: #6c757d;
-    }
-    .btn-secondary:hover {
-      background-color: #565e64;
-    }
-
-    .btn-lightgray {
-      background-color: #e9ecef;
-      border: 1px solid #ced4da;
-      color: #212529;
-    }
-    .btn-lightgray:hover {
-      background-color: #dee2e6;
-    }
-
-    .w-100 {
-      width: 100%;
-    }
-
-    /* Gap utility */
-    .gap-2 > * + * {
-      margin-left: 8px;
-    }
-
-    .d-flex {
-      display: flex;
-    }
-
-    .justify-content-center {
-      justify-content: center;
-    }
-
-    .align-items-end {
-      align-items: flex-end;
-    }
-
-    .mt-3 {
-      margin-top: 1rem;
-    }
-
-    .mt-4 {
-      margin-top: 1.5rem;
-    }
-
-    /* Table styles */
-    .table-responsive {
-      overflow-x: auto;
-      margin-top: 1rem;
-    }
-
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      min-width: 600px;
-    }
-
-    th, td {
-      border: 1px solid #dee2e6;
-      padding: 8px 12px;
-      vertical-align: middle;
-      text-align: left;
-      font-size: 14px;
-    }
-
-    th {
-      background-color: #f1f1f1;
-      font-weight: 600;
-    }
-
-    /* Modal styles (basic) */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1050;
-      left: 0;
-      top: 0;
-      width: 100vw;
-      height: 100vh;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.5);
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      box-sizing: border-box;
-    }
-
-    .modal.show {
-      display: flex;
-    }
-
-    .modal-dialog {
-      background: white;
-      border-radius: 8px;
-      max-width: 800px;
-      width: 100%;
-      box-sizing: border-box;
-      box-shadow: 0 0 12px rgba(0,0,0,0.25);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .modal-header {
-      padding: 1rem 1.5rem;
-      border-bottom: 1px solid #dee2e6;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .modal-title {
-      margin: 0;
-      font-weight: 600;
-      font-size: 1.25rem;
-    }
-
-    .btn-close {
-      background: transparent;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      line-height: 1;
-      color: #000;
-      opacity: 0.5;
-      transition: opacity 0.15s ease-in-out;
-    }
-    .btn-close:hover {
-      opacity: 1;
-    }
-
-    .modal-body {
-      padding: 1rem 1.5rem;
-    }
-
-  </style>
+  <link rel="stylesheet" th:href="@{/css/icons/bootstrap-icons.css}">
 </head>
 <body>
 
   <div class="container">
     <h2>Registrar Cita</h2>
+
+    <!-- Mensaje de éxito -->
+<div id="mensajeExito" 
+     th:if="${mensaje}" 
+     class="alert alert-success alert-dismissible fade show text-center" 
+     role="alert" 
+     style="display:none;"
+     th:text="${mensaje}">
+</div>
+
 
     <form th:action="@{/citas/registrar}" th:object="${cita}" method="post">
       <!-- Encabezado -->
@@ -327,15 +76,15 @@
         <div class="row align-items-end">
           <div class="col-md-4">
             <label class="form-label">Médico</label>
-            <input type="text" class="form-control" th:value="${cita.medico?.nombre}" />
+            <input type="text" id="inputNombreMedico" class="form-control" th:value="${cita.medico?.nombre}" readonly />
           </div>
           <div class="col-md-4">
             <label class="form-label">Consultorio</label>
-            <input type="text" class="form-control"
-            th:value="${cita.medico != null ? cita.medico.consultorio : ''}" readonly />
+            <input type="text" id="inputConsultorioMedico" class="form-control"
+           th:value="${cita.medico != null ? cita.medico.consultorio : ''}" readonly />
           </div>
           <div class="col-md-4">
-            <button type="button" class="btn btn-lightgray w-100">
+            <button type="button" class="btn btn-lightgray w-100"  id="btnOpenModalMedico">
               <i class="bi bi-search"></i> Buscar Disp. Médico
             </button>
           </div>
@@ -363,44 +112,15 @@
       <input type="hidden" th:field="*{paciente.dni}" />
       <input type="hidden" th:field="*{paciente.historiaClinica}" />
 
-
-      <!-- Tabla -->
-      <div class="table-responsive">
-        <table>
-          <thead>
-            <tr>
-              <th>Nro. Cita</th>
-              <th>NombreCompletoPaciente</th>
-              <th>DNI paciente</th>
-              <th>Historia Clínica</th>
-              <th>Médico</th>
-              <th>Consultorio</th>
-              <th>Fecha Cita</th>
-              <th>Hora Cita</th>
-              <th>Tipo Atención</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="c : ${citas}">
-              <td th:text="${c.codigoCita}"></td>
-              <td th:text="${c.paciente.nombreCompleto}"></td>
-              <td th:text="${c.paciente.dni}"></td>
-              <td th:text="${c.paciente.historiaClinica}"></td>
-              <td th:text="${c.medico.nombreCompleto}"></td>
-              <td th:text="${c.medico.consultorio.nombre}"></td>
-              <td th:text="${#dates.format(c.fechaCita, 'dd/MM/yyyy')}"></td>
-              <td th:text="${c.horaCita}"></td>
-              <td th:text="${c.tipoAtencion}"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <input type="hidden" th:field="*{medico.idMedico}" />
+      <input type="hidden" th:field="*{medico.nombre}" />
+      <input type="hidden" th:field="*{medico.consultorio}" />
 
       <!-- Botones -->
       <div class="d-flex justify-content-center gap-2 mt-4">
         <button type="submit" class="btn btn-success px-4">Registrar</button>
         <a th:href="@{/citas/consultar}" class="btn btn-dark px-4">Anular</a>
-        <a th:href="@{/dashboard/recepcionista}" class="btn btn-secondary px-4">Regresar</a>
+        <a th:href="@{/citas/menu}" class="btn btn-secondary px-4">Regresar</a>
       </div>
     </form>
 
@@ -420,12 +140,13 @@
       </div>
     </div>
 
+    <!-- Modal Buscar Disponibilidad de Médico -->
+    <div th:replace="~{fragmentos/modalDisponibilidadMedico :: modalDisponibilidadMedicoFragment}"></div>
+
   </div>
 
-  <!-- Bootstrap icons (optional) -->
-  <link th:href="@{/css/icons/bootstrap-icons.css}" rel="stylesheet" />
-
-  <script src="/js/registrar-cita.js"></script>
-
+  <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/js/registrar-cita.js}"></script>
+  <script th:src="@{/js/disponibilidad-medico.js}"></script>
 </body>
 </html>

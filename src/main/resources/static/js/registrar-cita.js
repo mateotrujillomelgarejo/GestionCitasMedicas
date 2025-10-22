@@ -3,6 +3,7 @@ const btnOpenModal = document.getElementById('btnOpenModalPaciente');
 const btnCloseModal = document.getElementById('btnCloseModalPaciente');
 const inputBuscar = document.getElementById('inputBuscarPaciente');
 const resultadoDiv = document.getElementById('resultadoPacientes');
+const mensajeDiv = document.getElementById("mensajeExito");
 
 // Abrir modal
 btnOpenModal.addEventListener('click', () => {
@@ -19,6 +20,13 @@ btnCloseModal.addEventListener('click', () => {
   document.body.style.overflow = '';
 });
 
+  if (mensajeDiv && mensajeDiv.textContent.trim() !== "") {
+    mensajeDiv.style.display = "block";
+    setTimeout(() => {
+      mensajeDiv.style.display = "none";
+    }, 5000);
+  }
+
 modal.addEventListener('click', (e) => {
   if (e.target === modal) {
     modal.classList.remove('show');
@@ -26,7 +34,6 @@ modal.addEventListener('click', (e) => {
   }
 });
 
-// Búsqueda dinámica
 inputBuscar.addEventListener("input", function () {
   let query = this.value.trim();
   if (query.length < 2) {

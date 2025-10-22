@@ -35,4 +35,19 @@ public class PacienteServiceImpl implements PacienteService {
     public List<Paciente> buscarPacientes(String query) {
         return pacienteRepository.buscarPorNombreODniOTelefono(query);
     }
+
+    @Override
+    public void eliminarPaciente(Long id) {
+        pacienteRepository.deleteById(id);
+    }
+
+    @Override
+    public Paciente obtenerPacientePorId(Long id) {
+        return pacienteRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void actualizarPaciente(Paciente paciente) {
+        pacienteRepository.save(paciente);
+    }
 }

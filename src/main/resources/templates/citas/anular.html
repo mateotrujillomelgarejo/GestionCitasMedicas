@@ -26,17 +26,18 @@
     <div class="info">
       <p><strong>Número de Cita:</strong> <span th:text="*{codigoCita}"></span></p>
       <p><strong>Paciente:</strong> <span th:text="*{paciente.nombreCompleto}"></span></p>
-      <p><strong>Médico:</strong> <span th:text="*{medico.nombreCompleto}"></span></p>
+      <p><strong>Médico:</strong> <span th:text="*{medico.nombre}"></span></p>
       <p><strong>Especialidad:</strong> <span th:text="*{medico.especialidad}"></span></p>
       <p><strong>Fecha y Hora:</strong> 
-        <span th:text="${#dates.format(cita.fechaCita, 'dd/MM/yyyy')} + ' - ' + ${cita.horaCita}"></span></p>
+        <span th:text="${#temporals.format(cita.fechaCita, 'dd/MM/yyyy')} + ' ' + ${cita.horaCita}"></span></p>
       <p><strong>Estado:</strong> <span th:text="*{estado}"></span></p>
     </div>
 
     <form th:action="@{/citas/anular/confirmar}" method="post" th:object="${cita}">
+      <input type="hidden" th:field="*{idCita}" />
       <div class="form-group">
         <label for="razon">Razón de Anulación *</label>
-        <textarea id="razon" th:field="*{motivoAnulacion}" placeholder="Ingrese la razón..."></textarea>
+        <textarea id="motivoAnulacion" name="motivoAnulacion" placeholder="Ingrese la razón..." required></textarea>
       </div>
       <button class="btn" type="submit">Confirmar Anulación</button>
     </form>

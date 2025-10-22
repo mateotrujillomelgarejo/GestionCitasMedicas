@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú Principal</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/css/icons/bootstrap-icons.css}">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .menu-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      gap: 15px;
+    }
+
+    .menu-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #343a40;
+    }
+
+    .menu-btn {
+      width: 220px;
+      padding: 10px;
+      font-size: 1rem;
+      color: #495057;
+      background-color: #e9ecef;
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      text-align: center;
+      text-decoration: none;
+      transition: background-color 0.2s;
+    }
+
+    .menu-btn:hover {
+      background-color: #dee2e6;
+      color: #212529;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="menu-container">
+    <h1 class="menu-title">Clínica S.R. - Menú Principal</h1>
+
+    <a th:href="@{/dashboard}" class="menu-btn">Regresar</a>
+    <a th:href="@{/citas/registrar}" class="menu-btn">Registrar Cita</a>
+    <a th:href="@{/citas/consultar}" class="menu-btn">Consultar Citas</a>
+  </div>
+
+</body>
+</html>

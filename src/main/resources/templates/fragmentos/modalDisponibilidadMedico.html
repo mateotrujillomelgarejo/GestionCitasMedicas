@@ -1,0 +1,76 @@
+<div th:fragment="modalDisponibilidadMedicoFragment">
+  <div class="modal" id="modalDisponibilidadMedico" aria-labelledby="modalBuscarMedicoLabel" aria-hidden="true" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalBuscarMedicoLabel">Buscar Disponibilidad de Médico</h5>
+          <button type="button" class="btn-close" id="btnCloseModalMedico" aria-label="Cerrar">&times;</button>
+        </div>
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="col-md-6">
+              <label for="inputDiaConsulta" class="form-label">Día de la consulta</label>
+              <select id="inputDiaConsulta" class="form-control">
+                <option value="">Seleccione...</option>
+                <option>Lunes</option>
+                <option>Martes</option>
+                <option>Miércoles</option>
+                <option>Jueves</option>
+                <option>Viernes</option>
+                <option>Sábado</option>
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <label for="inputHoraConsulta" class="form-label">Hora</label>
+              <input type="time" id="inputHoraConsulta" class="form-control" />
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end mt-3">
+            <button type="button" class="btn btn-dark" id="btnBuscarDisponibilidad">
+              <i class="bi bi-search"></i> Buscar
+            </button>
+          </div>
+
+          <div id="resultadoMedicos" class="mt-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<th:block th:fragment="resultados">
+  <div th:if="${#lists.isEmpty(medicos)}" class="alert alert-info">
+    No hay médicos disponibles para el día/hora seleccionados.
+  </div>
+
+  <div th:if="${!#lists.isEmpty(medicos)}" class="table-responsive">
+    <table class="table table-sm table-hover">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Especialidad</th>
+          <th>Consultorio</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="m : ${medicos}">
+          <td th:text="${m.nombre}">Dr. Nombre</td>
+          <td th:text="${m.especialidad}">Especialidad</td>
+          <td th:text="${m.consultorio}">Consultorio</td>
+          <td>
+            <button type="button"
+                    class="btn btn-primary btn-sm seleccionar-medico-btn"
+                    th:attr="data-id=${m.idMedico},data-nombre=${m.nombre},data-consultorio=${m.consultorio}">
+              Seleccionar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</th:block>
+

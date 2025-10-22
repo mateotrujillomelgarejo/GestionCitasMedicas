@@ -9,4 +9,7 @@ public interface PacienteService {
     Optional<Paciente> buscarPorDni(String dni);
     Paciente registrarPaciente(Paciente paciente);
     List<Paciente> listarPacientes();
+    void eliminarPaciente(Long id);
+    Paciente obtenerPacientePorId(Long id);
+    void actualizarPaciente(Paciente paciente);
 }

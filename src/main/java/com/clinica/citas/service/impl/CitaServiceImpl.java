@@ -75,4 +75,26 @@ public class CitaServiceImpl implements CitaService {
     numero++;
     return String.format("C-%03d", numero);
     }
+
+
+
+    @Override
+    public List<Cita> buscarPorCriterio(String criterio, String valor) {
+        return switch (criterio) {
+        case "dni" -> buscarPorDni(valor);
+        case "nombre" -> buscarPorNombre(valor);
+        case "codigo" -> {
+            Cita c = buscarPorCodigo(valor);
+            yield (c != null) ? List.of(c) : List.of();
+        }
+        default -> listarCitas();
+    };
+    }
+
+
+
+    @Override
+    public Cita buscarPorId(Long id) {
+        return citaRepository.getById(id);
+    }
 }

@@ -28,6 +28,15 @@ public class Paciente {
     @Column
     private String celular;
 
+    @Column(unique = true)
+    private String email;
+
+    @Column(length = 1)
+    private String genero; // M o F
+
+    @Column
+    private String direccion;
+
     @Column(name = "fecha_nacimiento")
     private String fechaNacimiento;
 }

@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>Editar Paciente</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/css/icons/bootstrap-icons.css}">
 </head>
 <body class="p-4">
 <div class="container">
@@ -15,10 +16,10 @@
   <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
 
   <form th:action="@{/pacientes/actualizar}" th:object="${paciente}" method="post">
-    <input type="hidden" th:field="*{id}" />
+    <input type="hidden" th:field="*{idPaciente}" />
     <div class="mb-3">
-      <label class="form-label">Nombre</label>
-      <input class="form-control" th:field="*{nombre}" required/>
+      <label class="form-label">Nombre Completo</label>
+      <input class="form-control" th:field="*{nombreCompleto}" required/>
     </div>
     <div class="mb-3">
       <label class="form-label">DNI</label>
@@ -26,11 +27,11 @@
     </div>
     <div class="mb-3">
       <label class="form-label">Teléfono</label>
-      <input class="form-control" th:field="*{telefono}" />
+      <input class="form-control" th:field="*{celular}" />
     </div>
     <div class="mb-3">
       <label class="form-label">Correo</label>
-      <input class="form-control" type="email" th:field="*{correo}" />
+      <input class="form-control" type="email" th:field="*{email}" />
     </div>
     <button class="btn btn-primary" type="submit">Actualizar</button>
     <a class="btn btn-outline-secondary" href="/pacientes">Cancelar</a>

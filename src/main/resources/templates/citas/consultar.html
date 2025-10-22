@@ -17,6 +17,9 @@
     th,td {text-align:left;padding:12px 10px;border:1px solid #ddd;font-size:14px;}
     th {background-color:#f2f2f2;font-weight:600;}
     tr:hover {background-color:#f9f9f9;}
+    a:hover {
+    background-color:#5a6268;
+    }
   </style>
 </head>
 <body>
@@ -28,7 +31,7 @@
       <select name="criterio">
         <option value="">Seleccione un criterio</option>
         <option value="dni">DNI</option>
-        <option value="apellido">Apellidos</option>
+        <option value="nombre">Nombre</option>
         <option value="codigo">Código de cita</option>
       </select>
     </div>
@@ -43,7 +46,7 @@
     <thead>
       <tr>
         <th>Código</th><th>Paciente</th><th>DNI</th><th>F.Nacimiento</th>
-        <th>Celular</th><th>Fecha y Hora</th><th>Doctor</th><th>Motivo</th>
+        <th>Celular</th><th>Fecha y Hora</th><th>Doctor</th><th>Motivo</th><th>Accion</th>
       </tr>
     </thead>
     <tbody>
@@ -53,14 +56,31 @@
         <td th:text="${cita.paciente.dni}"></td>
         <td th:text="${cita.paciente.fechaNacimiento}"></td>
         <td th:text="${cita.paciente.celular}"></td>
-        <td th:text="${#dates.format(cita.fechaCita, 'dd/MM/yyyy')} + ' ' + ${cita.horaCita}"></td>
-        <td th:text="${cita.medico.nombreCompleto}"></td>
+        <td th:text="${#temporals.format(cita.fechaCita, 'dd/MM/yyyy')} + ' ' + ${cita.horaCita}"></td>
+        <td th:text="${cita.medico.nombre}"></td>
         <td th:text="${cita.tipoAtencion}"></td>
+        <td>
+        <a th:href="@{'/citas/anular/' + ${cita.idCita}}"
+          style="background-color:#d9534f;color:white;padding:6px 12px;
+            border-radius:6px;text-decoration:none;font-size:14px;">
+              Anular
+          </a>
+          </td>
       </tr>
       <tr th:if="${#lists.isEmpty(citas)}">
         <td colspan="8" style="text-align:center;">No se encontraron citas.</td>
       </tr>
     </tbody>
   </table>
+
+  <div style="text-align:center; margin-top:30px;">
+  <a th:href="@{/citas/menu}" 
+     style="display:inline-block; background-color:#6c757d; color:white; 
+            text-decoration:none; padding:10px 25px; border-radius:6px; 
+            font-weight:600; transition: background-color 0.3s;">
+    Regresar
+  </a>
+</div>
+
 </body>
 </html>

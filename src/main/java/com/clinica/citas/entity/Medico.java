@@ -2,6 +2,7 @@ package com.clinica.citas.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "medico")
@@ -22,6 +23,18 @@ public class Medico {
     @Column(nullable = false)
     private String especialidad;
 
-    @Column(nullable = false)
+    @Column
     private String consultorio;
+
+    @Column(name = "horario_inicio")
+    private LocalTime horarioInicio;
+
+    @Column(name = "horario_fin")
+    private LocalTime horarioFin;
+
+    @Column(nullable = false)
+    private Boolean disponible = true;
+
+    @Column(name = "dias_disponibles")
+    private String diasDisponibles;
 }
