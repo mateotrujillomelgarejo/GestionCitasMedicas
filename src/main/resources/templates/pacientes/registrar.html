@@ -32,6 +32,25 @@
       <label class="form-label">Correo</label>
       <input class="form-control" type="email" th:field="*{email}" />
     </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Género</label>
+        <select class="form-select" th:field="*{genero}">
+          <option value="" disabled selected>Seleccione...</option>
+          <option value="M">Masculino</option>
+          <option value="F">Femenino</option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Fecha de Nacimiento</label>
+        <input class="form-control" type="date" th:field="*{fechaNacimiento}"/>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Dirección</label>
+      <textarea class="form-control" th:field="*{direccion}" rows="2"></textarea>
+    </div>
     <button class="btn btn-success" type="submit">Guardar</button>
     <a class="btn btn-outline-secondary" href="/pacientes">Cancelar</a>
   </form>
